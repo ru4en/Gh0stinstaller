@@ -52,7 +52,9 @@ if [ distroname="Debian $(cat /etc/debian_version)" ]; then
   
   #change wallpaper
   qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++){d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'$PWD'/wallpaper.jpg" )}'
-
+  xfconf-query -c xfce4-desktop -p insert_property_here -s /wallpaper.jpg
+  gsettings set org.gnome.desktop.background picture-uri file:///'$PWD'/wallpaper.jpg
+  
   #adding extra packages
   echo "${red}Adding VirtualBox${reset}"
   wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
