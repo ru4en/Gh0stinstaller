@@ -22,6 +22,8 @@ echo "${red}CPU${reset}: "$(grep -m 1 "model name	: " /proc/cpuinfo | sed "s/mod
 echo "${red}Memory${reset}: "$(vmstat -s -SM | grep "used memory" | tr -d "used memory")$(echo " / ")$(vmstat -s -SM | grep "total memory" | tr -d "total memory")
 echo ""
 echo ""
+echo "Do you want to continue? [Y/n]"
+
 if [ distroname="Debian $(cat /etc/debian_version)" ]; then
   echo "${On_Red}CORE${reset}"
   echo "${red}Updating and Upgrading${reset}"
