@@ -49,6 +49,9 @@ if [ distroname="Debian $(cat /etc/debian_version)" ]; then
   sudo apt -qqy install wget
   echo "${red}installing curl${reset}"
   sudo apt -qqy install curl
+  
+  #change wallpaper
+  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++){d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'$PWD'/wallpaper.jpg" )}'
 
   #adding extra packages
   echo "${red}Adding VirtualBox${reset}"
