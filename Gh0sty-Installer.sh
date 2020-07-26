@@ -9,8 +9,8 @@ reset='\033[0m'
 On_Red='\033[41m'
 
 #Ghosty Logo
-logoFile="*/gh0sty.txt"
-cat $logoFile
+DIR=$(dirname "$0")
+cat $DIR/gh0sty.txt  
 
 #ASCII art of logo
 echo '
@@ -52,9 +52,9 @@ if [ distroname="Debian $(cat /etc/debian_version)" ]; then
   sudo apt -qqy install curl
   
   #change wallpaper
-  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++){d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///*/wallpaper.jpg" )}'
+  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++){d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'$DIR'/wallpaper.jpg" )}'
   xfconf-query -c xfce4-desktop -p insert_property_here -s /wallpaper.jpg
-  gsettings set org.gnome.desktop.background picture-uri file:///*/wallpaper.jpg
+  gsettings set org.gnome.desktop.background picture-uri file:///'$DIR'/wallpaper.jpg
   
   #adding extra packages
   echo "${red}Adding VirtualBox${reset}"
