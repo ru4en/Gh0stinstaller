@@ -9,7 +9,7 @@ reset='\033[0m'
 On_Red='\033[41m'
 
 #Ghosty Logo
-logoFile="$PWD/gh0sty.txt"
+logoFile="*/gh0sty.txt"
 cat $logoFile
 
 #ASCII art of logo
@@ -52,9 +52,9 @@ if [ distroname="Debian $(cat /etc/debian_version)" ]; then
   sudo apt -qqy install curl
   
   #change wallpaper
-  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++){d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///'$PWD'/wallpaper.jpg" )}'
+  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'var allDesktops = desktops();print (allDesktops);for (i=0;i<allDesktops.length;i++){d = allDesktops[i];d.wallpaperPlugin = "org.kde.image";d.currentConfigGroup = Array("Wallpaper", "org.kde.image", "General");d.writeConfig("Image", "file:///*/wallpaper.jpg" )}'
   xfconf-query -c xfce4-desktop -p insert_property_here -s /wallpaper.jpg
-  gsettings set org.gnome.desktop.background picture-uri file:///'$PWD'/wallpaper.jpg
+  gsettings set org.gnome.desktop.background picture-uri file:///*/wallpaper.jpg
   
   #adding extra packages
   echo "${red}Adding VirtualBox${reset}"
@@ -81,11 +81,13 @@ if [ distroname="Debian $(cat /etc/debian_version)" ]; then
       echo "${red} Installing $item${reset}"
       sudo apt -qqy install $item
     done
-
   #setup
+  #setup vpn
     sudo surfshark-vpn
+#setting fish
     chsh -s /usr/bin/fish
     omf install bobthefish
-  else
-    echo "this script dose not surport $distroname"
+    cp */config.fish  ~/.config/fish/config.fish
+else
+echo "this script dose not surport $distroname"
   fi
