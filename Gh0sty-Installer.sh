@@ -8,6 +8,10 @@ green='\033[1;32m'
 reset='\033[0m'
 On_Red='\033[41m'
 
+#Ghosty Logo
+logoFile="$PWD/gh0sty.txt"
+cat $logoFile
+
 #ASCII art of logo
 echo '
   ____ _   _  ___  ____ _______   _____           _        _ _
@@ -15,7 +19,6 @@ echo '
 | |  _| |_| | | | \___ \ | |  \ V / | || `_ \/ __| __/ _` | | |/ _ \ `__|
 | |_| |  _  | |_| |___) || |   | |  | || | | \__ \ || (_| | | |  __/ |
  \____|_| |_|\___/|____/ |_|   |_| |___|_| |_|___/\__\__,_|_|_|\___|_|
-
 '
 #INFO of michine
 echo "${On_Red}welcome to Gh0sty installer!${reset}"
@@ -27,8 +30,6 @@ echo "${red}Shell${reset}: "$(echo $SHELL | sed "s/bin//g" | tr -d "/")
 echo "${red}CPU${reset}: "$(grep -m 1 "model name	: " /proc/cpuinfo | sed "s/model name	: //g" | tr -d '"')
 echo "${red}Memory${reset}: "$(vmstat -s -SM | grep "used memory" | tr -d "used memory")$(echo " / ")$(vmstat -s -SM | grep "total memory" | tr -d "total memory")
 echo ""
-echo ""
-
 #check if disrto surported
 if [ distroname="Debian $(cat /etc/debian_version)" ]; then
   #confonation
